@@ -1,0 +1,14 @@
+{
+    "manifest_version": 3,
+    "name" : "Grade Color Coder",
+    "description" : "Color code assignments based on your performance in canvas.",
+    "version": "0.1",
+    "action" : {
+        "default_popup" : "index.html"
+    },
+    "content_scripts" : [ {
+        "run_at" : "document_start",
+        "matches" : ["https://nmsu.instructure.com/courses/*/grades"],
+        "js" : ["javascript/colorcode.js"]
+    } ]
+}
