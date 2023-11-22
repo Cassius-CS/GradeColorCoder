@@ -96,42 +96,21 @@ else {
     createSubjectCookie();
 }
 
-function calculateGradeColor(grade, bottomRange, topRange) {
-    if (grade >= 0 && grade <= 100 && bottomRange >= 0 && topRange <= 100) {
-      if (grade <= bottomRange) {
-        return 'red'; // Change to bottom color ***
-      } else if (grade > bottomRange && grade < topRange) {
-        return 'yellow'; // Change to mid color ***
-      } else {
-        return 'green'; // Change to upper color ***
-      }
-    } 
-}
+var list = document.querySelectorAll(".student_assignment.assignment_graded.editable");
 
-function changeRowColorBasedOnGrade(rowId, bottomRange, topRange){
-    const row = document.getElementById(rowId)
+list.forEach(row => {
+    gradeContainer = row.querySelectorAll(".tooltip")[0];
 
-    if(row){
-        const gradeElement = row.querySelector('.grade');
+    receivedGrade = gradeContainer.children[0];
+    receivedGrade = receivedGrade.innerText;
+    receivedGrade = receivedGrade.match(/[-+]?\d*.?\d+/g)[0];
 
-        if(gradeElement){
-            const gradeValue = parseInt(gradeElement.textContent.trim(), 10)
-            
-            const color = calculateGradeColor(gradeValue, bottomRange, topRange)
+    totalGrade = gradeContainer.children[1].innerHTML.substring(2);
 
-            row.style.color = color;
-        }
-    }
-}
+    percentage = parseFloat(receivedGrade) / parseFloat(totalGrade);
 
-// Get all rows with a specific class name (you may need to adjust this selector)
-const rows = document.querySelectorAll('.student_assignment .assignment_graded .editable');
+    // compare grade with global ranges
+    // row.style.backgroundColor = "color";
+})
 
-rows.forEach(row => {
-  const rowId = row.id;
-  const bottomRange = 70; //change to bottom of mid range **
-  const topRange = 90; //change to top of mid range **
-
-  changeRowColorBasedOnGrade(rowId, bottomRange, topRange);
-});
  
