@@ -7,7 +7,7 @@
         "default_popup" : "index.html"
     },
     "content_scripts" : [ {
-        "run_at" : "document_start",
+        "run_at" : "document_idle",
         "matches" : ["https://nmsu.instructure.com/courses/*/grades"],
         "js" : ["javascript/colorcode.js"]
     } ]
