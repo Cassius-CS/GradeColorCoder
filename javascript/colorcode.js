@@ -86,6 +86,58 @@ async function isValidCookie(checkCook) {
     return true;
 }
 
+function changeColors(colors, ranges) {
+    lowColor = colors[0];
+    midColor = colors[1];
+    highColor = colors[2];
+
+    lowRange.push(ranges[0]);
+    lowRange.push(ranges[1]);
+
+    midRange.push(ranges[2]);
+    midRange.push(ranges[3]);
+
+    highRange.push(ranges[4]);
+    highRange.push(ranges[5]);
+
+    list.forEach(row => {
+        gradeContainer = row.querySelectorAll(".tooltip")[0];
+
+        receivedGrade = gradeContainer.children[0];
+        receivedGrade = receivedGrade.innerText;
+        if (receivedGrade.match(/[-+]?\d*.?\d+/g)) {
+            receivedGrade = receivedGrade.match(/[-+]?\d*.?\d+/g)[0];
+        }
+        else {
+            return;
+        }
+
+        totalGrade = gradeContainer.children[1].innerHTML.substring(2);
+
+        percentage = parseFloat(receivedGrade) / parseFloat(totalGrade);
+        percentage = percentage * 100;  
+
+        if (percentage > highRange[0] && percentage <= highRange[1]) {
+            row.style.backgroundColor = highColor;
+        }
+        else if (percentage > midRange[0] && percentage <= midRange[1]) {
+            row.style.backgroundColor = midColor;
+        }
+        else if (percentage > lowRange[0] && percentage <= lowRange[1]) {
+            row.style.backgroundColor = lowColor;
+        }
+    });
+}
+
+var highColor;
+var midColor;
+var lowColor;
+var highRange = [];
+var midRange = [];
+var lowRange = [];
+
+var list = document.querySelectorAll(".student_assignment.assignment_graded.editable");
+
 window.onbeforeunload = sendTimeToDB;
 let startURL = location.href;
 const startTime = performance.now();
@@ -96,21 +148,15 @@ else {
     createSubjectCookie();
 }
 
-var list = document.querySelectorAll(".student_assignment.assignment_graded.editable");
+chrome.runtime.onConnect.addListener(function(port) {
+    console.assert(port.name === "colorInfo");
+    port.onMessage.addListener(function(msg) {
+        var colors = msg.colors.split(",");
+        var ranges = msg.range.split(",");
+        changeColors(colors, ranges);
+    });
+});
 
-list.forEach(row => {
-    gradeContainer = row.querySelectorAll(".tooltip")[0];
-
-    receivedGrade = gradeContainer.children[0];
-    receivedGrade = receivedGrade.innerText;
-    receivedGrade = receivedGrade.match(/[-+]?\d*.?\d+/g)[0];
-
-    totalGrade = gradeContainer.children[1].innerHTML.substring(2);
-
-    percentage = parseFloat(receivedGrade) / parseFloat(totalGrade);
-
-    // compare grade with global ranges
-    // row.style.backgroundColor = "color";
-})
-
- 
+defaultColors = ["indianred", "lightyellow", "lightgreen"];
+defaultRanges = [0, 60, 60, 85, 85, 100];
+changeColors(defaultColors, defaultRanges);

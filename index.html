@@ -4,43 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
 </head>
 <body>
-    <form>
-        <label >High Green Number: </label>
-        <input type="number" step=0.01 id="highGreenInput"/>
-        <p id="messageHGreen"></p>
+    <div id="test">
+        <p style="color: red;" id="errorMessage"></p>
+        <label >High % Color (name of color or hex): </label>
+        <input type="text" step=0.01 id="color1" placeholder="lightgreen"/>
         <br/>
 
-        <label >Low Green Number: </label>
-        <input type="number" step=0.01 id="lowGreenInput"/>
-        <p id="messageLGreen"></p>
+        <label >High % Range: </label>
+        <br>
+        <input type="number" style="width: 30%;" step=0.01 id="lowRange1" placeholder="85"/> 
+        - 
+        <input type="number" style="width: 30%;" step=0.01 id="highRange1" placeholder="100"/>
         <br/>
 
-        <label>High Yellow Number: </label>
-        <input type="number" step=0.01 id="highYellowInput">
-        <p id="messageHYellow"></p>
+        <label >Mid % Color (name of color or hex): </label>
+        <input type="text" step=0.01 id="color2" placeholder="lightyellow"/>
         <br/>
 
-        <label>Low Yellow Number: </label>
-        <input type="number" step=0.01 id="lowYellowInput">
-        <p id="messageLYellow"></p>
+        <label >Mid % Range: </label>
+        <br>
+        <input type="number" style="width: 30%;" step=0.01 id="lowRange2" placeholder="60"/> 
+        - 
+        <input type="number" style="width: 30%;" step=0.01 id="highRange2" placeholder="85"/>
         <br/>
 
-        <label>High Red Number: </label>
-        <input type="number" step=0.01 id="highRedInput">
-        <p id="messageHRed"></p>
-        <br/>
-        
-        <label>Low Red Number: </label>
-        <input type="number" step=0.01 id="lowRedInput">
-        <p id="messageLRed"></p>
+        <label >Low % Color (name of color or hex): </label>
+        <input type="text" step=0.01 id="color3" placeholder="indianred"/>
         <br/>
 
-        <button id="submitColors">Submit</button>
-        
-    </form>
+        <label >Low Range: </label>
+        <br>
+        <input type="number" style="width: 30%;" step=0.01 id="lowRange3" placeholder="0"/> 
+        - 
+        <input type="number" style="width: 30%;" step=0.01 id="highRange3" placeholder="60"/>
+        <br/>
+        <br>
+        <button id="submitColors">Submit</button>    
+    </div>
     <script type="module" src="javascript/userinput.js"></script>
 </body>
 </html>
