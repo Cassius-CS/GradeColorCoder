@@ -5,6 +5,7 @@ var highRange = [];
 var midRange = [];
 var lowRange = [];
 
+const tabs = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
 var submitButton = document.getElementById("submitColors");
 submitButton.addEventListener("click", submitColors);
 
@@ -38,7 +39,6 @@ async function submitColors() {
     var allRanges = [lowRange, midRange, highRange];
     checkRanges(allRanges);
 
-    const tabs = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
     var port = chrome.tabs.connect(tabs[0].id, {name: "colorInfo"});
     port.postMessage({range: allRanges.join(","),
                     colors: lowColor + "," + midColor + "," + highColor});

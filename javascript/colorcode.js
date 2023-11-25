@@ -115,7 +115,7 @@ function changeColors(colors, ranges) {
         totalGrade = gradeContainer.children[1].innerHTML.substring(2);
 
         percentage = parseFloat(receivedGrade) / parseFloat(totalGrade);
-        percentage = percentage * 100;  
+        percentage = percentage * 100;
 
         if (percentage > highRange[0] && percentage <= highRange[1]) {
             row.style.backgroundColor = highColor;
@@ -127,6 +127,9 @@ function changeColors(colors, ranges) {
             row.style.backgroundColor = lowColor;
         }
     });
+    lowRange = [];
+    midRange = [];
+    highRange = [];
 }
 
 var highColor;
