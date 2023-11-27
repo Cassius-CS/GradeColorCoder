@@ -123,7 +123,7 @@ function changeColors(colors, ranges) {
         else if (percentage > midRange[0] && percentage <= midRange[1]) {
             row.style.backgroundColor = midColor;
         }
-        else if (percentage > lowRange[0] && percentage <= lowRange[1]) {
+        else if (percentage >= lowRange[0] && percentage <= lowRange[1]) {
             row.style.backgroundColor = lowColor;
         }
     });
